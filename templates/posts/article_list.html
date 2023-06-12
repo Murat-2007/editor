@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Articles 
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1 class="page-header"><span> ARTICLE LIST</span>
+                    <small class="pull-right"><a href="{% url 'article_create' %}"> Article Create</a></small>
+                </h1>
+                {% for post in posts %}
+                    <h3><a href="{% url 'article_detail' post.slug %}"><span>{{ post.title }}</span></a>
+                        <small><span style="font-size: small;" class="glyphicon glyphicon-time"></span> {{ post.created_date }}</small>
+                        
+                    </h3>
+                    
+                    
+                    <p style="font-size: large;">{{ post.content|linebreaksbr|truncatechars:50 }}</p>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </div>  
+{% endblock %}
+

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}
+	Personal Info
+{% endblock %}
+{% block content %}
+    <div class="col-lg-5">
+        <h1 class="page-header">Personal Info</h1>
+        <form method="get" action="{% url 'personal_info' %}">
+            {% for field in form %}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2">
+                            <label for="{{ field.id_for_label }}" class="control-label">{{ field.label }}</label>
+                        </div>        
+                        <div class="col-lg-10 col-md-10">
+                            {{ field }}
+                            <br>
+							{% if field.errors %}
+								{% for error in field.errors %}
+									<span class="text-danger"><b>{{ error }}</b></span>
+								{% endfor %}
+							{% endif %}
+                        </div>    
+                    </div>
+                </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-sm btn-success">
+        </form>
+    </div>
+    <div class="col-lg-5">
+        <h1 class="page-header">Messages</h1>
+        {% for message in messages %}
+            <div class="form-group">
+                <p class="lead"><!--{{ forloop.counter }}--> {{ message.name}} {{ message.surname}} {{ message.email}} {{ message.content}}</p>
+            </div>
+        {% empty %}
+            <p class="lead"><span class="glyphicon glyphicon-inbox"><span>No Messages Yet</p>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
